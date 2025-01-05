@@ -1,9 +1,18 @@
-import express from "express";
+import express, { Application } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import exampleRoute from "./routes/exampleRoute";
 
-const app = express();
+const app: Application = express();
 
-const PORT = 8000;
+// Middleware
+app.use(express.json());
 
+// Routes
+app.use("/api", exampleRoute);
+
+// Start server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Running on Port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
